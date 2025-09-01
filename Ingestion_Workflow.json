@@ -1,0 +1,476 @@
+{
+  "name": "My workflow",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        16,
+        0
+      ],
+      "id": "33e63577-3f6e-467e-94ee-43f0938d8ef5",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1Aixc7qe5nhUloftgbNF0ogpGcTt16FzWfEE0MIdrbVw",
+          "mode": "list",
+          "cachedResultName": "ads_spend",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1Aixc7qe5nhUloftgbNF0ogpGcTt16FzWfEE0MIdrbVw/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 175873093,
+          "mode": "list",
+          "cachedResultName": "ads_spend",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1Aixc7qe5nhUloftgbNF0ogpGcTt16FzWfEE0MIdrbVw/edit#gid=175873093"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        432,
+        0
+      ],
+      "id": "faef5c55-9fef-4ba5-bf6d-a937fb788e39",
+      "name": "Get row(s) in sheet",
+      "executeOnce": false,
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "SisGQQzEeKiEppJS",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "authentication": "serviceAccount",
+        "projectId": {
+          "__rl": true,
+          "value": "excellent-bolt-470412-v9",
+          "mode": "list",
+          "cachedResultName": "My First Project",
+          "cachedResultUrl": "https://console.cloud.google.com/bigquery?project=excellent-bolt-470412-v9"
+        },
+        "sqlQuery": "TRUNCATE TABLE dbo.staging_ads_raw;",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleBigQuery",
+      "typeVersion": 2.1,
+      "position": [
+        256,
+        -208
+      ],
+      "id": "d9789bbc-2ed0-4061-b03d-c53f876b2239",
+      "name": "Execute a SQL query",
+      "credentials": {
+        "googleApi": {
+          "id": "MGSGrxKweRiQ5poo",
+          "name": "Google BigQuery account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "authentication": "serviceAccount",
+        "projectId": {
+          "__rl": true,
+          "value": "excellent-bolt-470412-v9",
+          "mode": "list",
+          "cachedResultName": "My First Project",
+          "cachedResultUrl": "https://console.cloud.google.com/bigquery?project=excellent-bolt-470412-v9"
+        },
+        "sqlQuery": "CALL dbo.update_accounts();",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleBigQuery",
+      "typeVersion": 2.1,
+      "position": [
+        1088,
+        0
+      ],
+      "id": "ee2472de-7f05-4922-b9ab-b29f2fa804ae",
+      "name": "Update Accounts",
+      "executeOnce": true,
+      "alwaysOutputData": false,
+      "credentials": {
+        "googleApi": {
+          "id": "MGSGrxKweRiQ5poo",
+          "name": "Google BigQuery account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "authentication": "serviceAccount",
+        "projectId": {
+          "__rl": true,
+          "value": "excellent-bolt-470412-v9",
+          "mode": "list",
+          "cachedResultName": "My First Project",
+          "cachedResultUrl": "https://console.cloud.google.com/bigquery?project=excellent-bolt-470412-v9"
+        },
+        "sqlQuery": "CALL dbo.update_campaigns();",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleBigQuery",
+      "typeVersion": 2.1,
+      "position": [
+        864,
+        0
+      ],
+      "id": "8f55657e-9579-4c74-9563-ba93fc38d744",
+      "name": "Update Campaigns",
+      "executeOnce": true,
+      "alwaysOutputData": false,
+      "credentials": {
+        "googleApi": {
+          "id": "MGSGrxKweRiQ5poo",
+          "name": "Google BigQuery account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "authentication": "serviceAccount",
+        "projectId": {
+          "__rl": true,
+          "value": "excellent-bolt-470412-v9",
+          "mode": "list",
+          "cachedResultName": "My First Project",
+          "cachedResultUrl": "https://console.cloud.google.com/bigquery?project=excellent-bolt-470412-v9"
+        },
+        "sqlQuery": "CALL dbo.update_countries();",
+        "options": {
+          "dryRun": false
+        }
+      },
+      "type": "n8n-nodes-base.googleBigQuery",
+      "typeVersion": 2.1,
+      "position": [
+        1248,
+        0
+      ],
+      "id": "cbd37f5f-0af7-4606-b514-5e68b7017597",
+      "name": "Update Countries",
+      "executeOnce": true,
+      "credentials": {
+        "googleApi": {
+          "id": "MGSGrxKweRiQ5poo",
+          "name": "Google BigQuery account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "authentication": "serviceAccount",
+        "projectId": {
+          "__rl": true,
+          "value": "excellent-bolt-470412-v9",
+          "mode": "list",
+          "cachedResultName": "My First Project",
+          "cachedResultUrl": "https://console.cloud.google.com/bigquery?project=excellent-bolt-470412-v9"
+        },
+        "sqlQuery": "CALL dbo.update_platforms();",
+        "options": {
+          "dryRun": false
+        }
+      },
+      "type": "n8n-nodes-base.googleBigQuery",
+      "typeVersion": 2.1,
+      "position": [
+        1424,
+        0
+      ],
+      "id": "a367a52d-8b86-483d-83f6-47ceeae047ff",
+      "name": "Update Platforms",
+      "executeOnce": true,
+      "credentials": {
+        "googleApi": {
+          "id": "MGSGrxKweRiQ5poo",
+          "name": "Google BigQuery account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "authentication": "serviceAccount",
+        "projectId": {
+          "__rl": true,
+          "value": "excellent-bolt-470412-v9",
+          "mode": "list",
+          "cachedResultName": "My First Project",
+          "cachedResultUrl": "https://console.cloud.google.com/bigquery?project=excellent-bolt-470412-v9"
+        },
+        "sqlQuery": "CALL dbo.update_devices();",
+        "options": {
+          "dryRun": false
+        }
+      },
+      "type": "n8n-nodes-base.googleBigQuery",
+      "typeVersion": 2.1,
+      "position": [
+        1600,
+        0
+      ],
+      "id": "ccc78f76-22f6-4185-b263-ead1e0790f52",
+      "name": "Update Devices",
+      "executeOnce": true,
+      "credentials": {
+        "googleApi": {
+          "id": "MGSGrxKweRiQ5poo",
+          "name": "Google BigQuery account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "authentication": "serviceAccount",
+        "projectId": {
+          "__rl": true,
+          "value": "excellent-bolt-470412-v9",
+          "mode": "list",
+          "cachedResultName": "My First Project",
+          "cachedResultUrl": "https://console.cloud.google.com/bigquery?project=excellent-bolt-470412-v9"
+        },
+        "sqlQuery": "CALL dbo.update_fact_ads()",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleBigQuery",
+      "typeVersion": 2.1,
+      "position": [
+        1776,
+        0
+      ],
+      "id": "700dd81e-e2a7-4cd4-840e-3ce60cb23ae1",
+      "name": "Update Fact Ads",
+      "executeOnce": true,
+      "credentials": {
+        "googleApi": {
+          "id": "MGSGrxKweRiQ5poo",
+          "name": "Google BigQuery account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "authentication": "serviceAccount",
+        "operation": "insert",
+        "projectId": {
+          "__rl": true,
+          "value": "excellent-bolt-470412-v9",
+          "mode": "list",
+          "cachedResultName": "My First Project",
+          "cachedResultUrl": "https://console.cloud.google.com/bigquery?project=excellent-bolt-470412-v9"
+        },
+        "datasetId": {
+          "__rl": true,
+          "value": "dbo",
+          "mode": "list",
+          "cachedResultName": "dbo"
+        },
+        "tableId": {
+          "__rl": true,
+          "value": "staging_ads_raw",
+          "mode": "list",
+          "cachedResultName": "staging_ads_raw"
+        },
+        "dataMode": "define",
+        "fieldsUi": {
+          "values": [
+            {
+              "fieldId": "date",
+              "fieldValue": "={{ $json.date }}"
+            },
+            {
+              "fieldId": "platform",
+              "fieldValue": "={{ $json.platform }}"
+            },
+            {
+              "fieldId": "account",
+              "fieldValue": "={{ $json.account }}"
+            },
+            {
+              "fieldId": "campaign",
+              "fieldValue": "={{ $json.campaign }}"
+            },
+            {
+              "fieldId": "country",
+              "fieldValue": "={{ $json.country }}"
+            },
+            {
+              "fieldId": "device",
+              "fieldValue": "={{ $json.device }}"
+            },
+            {
+              "fieldId": "spend",
+              "fieldValue": "={{ $json.spend }}"
+            },
+            {
+              "fieldId": "clicks",
+              "fieldValue": "={{ $json.clicks }}"
+            },
+            {
+              "fieldId": "impressions",
+              "fieldValue": "={{ $json.impressions }}"
+            },
+            {
+              "fieldId": "conversions",
+              "fieldValue": "={{ $json.conversions }}"
+            },
+            {
+              "fieldId": "id",
+              "fieldValue": "={{ $json.id }}"
+            },
+            {
+              "fieldId": "source_file",
+              "fieldValue": "ads_spend_sheet"
+            },
+            {
+              "fieldId": "loading_date",
+              "fieldValue": "={{ $now }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleBigQuery",
+      "typeVersion": 2.1,
+      "position": [
+        688,
+        0
+      ],
+      "id": "1c39dad3-cc66-48e6-9057-fb758482fe1f",
+      "name": "Insert rows in a table",
+      "executeOnce": false,
+      "credentials": {
+        "googleApi": {
+          "id": "MGSGrxKweRiQ5poo",
+          "name": "Google BigQuery account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "Execute a SQL query",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Get row(s) in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get row(s) in sheet": {
+      "main": [
+        [
+          {
+            "node": "Insert rows in a table",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Execute a SQL query": {
+      "main": [
+        [
+          {
+            "node": "Get row(s) in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update Accounts": {
+      "main": [
+        [
+          {
+            "node": "Update Countries",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update Countries": {
+      "main": [
+        [
+          {
+            "node": "Update Platforms",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update Campaigns": {
+      "main": [
+        [
+          {
+            "node": "Update Accounts",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update Platforms": {
+      "main": [
+        [
+          {
+            "node": "Update Devices",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update Devices": {
+      "main": [
+        [
+          {
+            "node": "Update Fact Ads",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Insert rows in a table": {
+      "main": [
+        [
+          {
+            "node": "Update Campaigns",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "994bdfe7-b0e5-4753-b34a-14b47b8710cf",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "e25cba67f98e942a49af2d494965a144e5c01210e52a2870c7527ea2c74b37a9"
+  },
+  "id": "iQNd4jeZNnvxa33t",
+  "tags": []
+}
